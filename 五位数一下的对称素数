@@ -1,0 +1,25 @@
+#include<iostream>
+using namespace std;
+bool ss(int n)       //判断素数 
+{if(n==1) return false;
+ if(n!=2&&n%2==0) return false;
+ for(int i=3;i*i<=n;i++)
+     {
+     	if(n%i==0) return false;
+     }
+ return true;
+}
+bool dc(int n)      //判断数是否对称 
+{if(n<12&&n!=10) return true;
+ if(n>100&&n<1000&&n/100==n%10) return true;
+ if(n>10000&&n<100000&&n/1000==n%10*10+n/10%10) return true;
+ return false;
+}
+int main()
+{
+	int n;
+    while(cin>>n)
+    {cout<<(ss(n)&&dc(n)?"Yes\n":"No\n");
+	}
+	
+}
