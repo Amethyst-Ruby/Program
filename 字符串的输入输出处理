@@ -35,7 +35,7 @@ int main()
 	int n,count=0,i;
 	string str;
 	cin>>n;
-	getchar();
+	getchar();                        //把换行符给输进去。
     while(n--)
 	{   getline(cin,str);
 		cout<<str<<endl<<endl;
