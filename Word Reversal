@@ -52,3 +52,13 @@ int main()
         }
     }
 }
+
+
+ 我的笔记 ：
+ 1. string s,ss;
+    char ch[81];
+    while(cin.getline(ch,81))
+       {
+         s=ch; 
+       }
+    这个语句可以输入包括空格在内的str；而while（getline（cin，str））办不到。
