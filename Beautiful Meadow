@@ -1,0 +1,64 @@
+Description
+Tom's Meadow Tom has a meadow in his garden. He divides it into N * M squares. Initially all the squares were covered with grass. He mowed down the grass on some of the squares and thinks the meadow is beautiful if and only if 1. Not all squares are covered with grass. 2. No two mowed squares are adjacent. Two squares are adjacent if they share an edge. Here comes the problem: Is Tom's meadow beautiful now?
+
+Input
+The input contains multiple test cases! Each test case starts with a line containing two integers N, M (1 <= N, M <= 10) separated by a space. There follows the description of Tom's Meadow. There're N lines each consisting of M integers separated by a space. 0(zero) means the corresponding position of the meadow is mowed and 1(one) means the square is covered by grass. A line with N = 0 and M = 0 signals the end of the input, which should not be processed
+
+Output
+One line for each test case. Output "Yes" (without quotations) if the meadow is beautiful, otherwise "No"(without quotations).
+
+Sample Input
+2 2
+1 0
+0 1
+2 2
+1 1
+0 0
+2 3
+1 1 1
+1 1 1
+0 0
+
+Sample Output
+Yes
+No
+No
+
+
+
+
+
+#include<iostream>
+using namespace std;
+int main() 
+{
+	int p[10][10];
+	int n,m,i,j,k;
+	int flag=1;
+	while(cin>>n>>m)
+	{
+		if(n==0&&m==0) break;
+		flag=1;                      //这个不能丢
+        for(i=0;i<n;i++)
+		  for(j=0;j<m;j++)
+		    {
+    			cin>>p[i][j];
+    			if(p[i][j]==0) flag=0;
+    		}
+        if(flag==1)
+        {cout<<"No"<<endl;
+         continue;}
+        for(k=1;k<m;k++)
+        	if(p[0][k]==0&&p[0][k-1]==0)       {cout<<"No"<<endl; goto RL;} 
+        for(i=1;i<n;i++)
+           for(j=0;j<m;j++)
+             {
+			  if(p[i][j]==0&&p[i-1][j]==0)     {cout<<"No"<<endl; goto RL;}
+              if(j!=0)
+			     if(p[i][j]==0&&p[i][j-1]==0)  {cout<<"No"<<endl; goto RL;} 			 
+ 			 }
+        cout<<"Yes"<<endl;
+        continue;
+        RL:continue;    
+	 }
+}
