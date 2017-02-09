@@ -1,3 +1,4 @@
-# Programsad
-C++ Program for ACM
+# Program
+
+ACM
 日常整理程序。
