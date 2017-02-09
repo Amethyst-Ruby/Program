@@ -1,0 +1,94 @@
+Description
+The Antique Comedians of Malidinesia prefer comedies to tragedies. Unfortunately, most of the ancient plays are tragedies. Therefore the dramatic advisor of ACM has decided to transfigure some tragedies into comedies. Obviously, this work is very hard because the basic sense of the play must be kept intact, although all the things change to their opposites. For example the numbers: if any number appears in the tragedy, it must be converted to its reversed form before being accepted into the comedy play. Reversed number is a number written in arabic numerals but the order of digits is reversed. The first digit becomes last and vice versa. For example, if the main hero had 1245 strawberries in the tragedy, he has 5421 of them now. Note that all the leading zeros are omitted. That means if the number ends with a zero, the zero is lost by reversing (e.g. 1200 gives 21). Also note that the reversed number never has any trailing zeros. ACM needs to calculate with reversed numbers. Your task is to add two reversed numbers and output their reversed sum. Of course, the result is not unique because any particular number is a reversed form of several numbers (e.g. 21 could be 12, 120 or 1200 before reversing). Thus we must assume that no zeros were lost by reversing (e.g. assume that the original number was 12).
+
+Input
+The input consists of N cases. The first line of the input contains only positive integer N. Then follow the cases. Each case consists of exactly one line with two positive integers separated by space. These are the reversed numbers you are to add. Numbers will be at most 200 characters long.
+
+Output
+For each case, print exactly one line containing only one integer - the reversed sum of two reversed numbers. Omit any leading zeros in the output.
+
+Sample Input
+3
+24 1
+4358 754
+305 794
+
+Sample Output
+34
+1998
+1
+
+
+
+
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+int main()
+{
+	string sa,sb,st;
+	vector<int>v;
+	int a,b,sum,n,i,j;
+	int p=0;
+	int u=0;
+	cin>>n;
+	while(cin>>sa>>sb)
+	{
+		if(sa.size()<sb.size())
+		{st=sa;
+		 sa=sb;
+		 sb=st;
+		}
+	    for(i=0;i<sa.size();i++)
+	    {
+    		if(sa[i]=='0')a=0;
+    		else if (sa[i]=='1')a=1;
+    		else if (sa[i]=='2')a=2;
+    		else if (sa[i]=='3')a=3;
+    		else if (sa[i]=='4')a=4;
+    		else if (sa[i]=='5')a=5;
+    		else if (sa[i]=='6')a=6;
+    		else if (sa[i]=='7')a=7;
+    		else if (sa[i]=='8')a=8;
+    		else if (sa[i]=='9')a=9;
+    		
+			if(i>=sb.size()) b=0;
+    		else if(sb[i]=='0') b=0;
+    		else if(sb[i]=='1') b=1;
+    		else if(sb[i]=='2') b=2;
+    		else if(sb[i]=='3') b=3;
+    		else if(sb[i]=='4') b=4;
+    		else if(sb[i]=='5') b=5;
+    		else if(sb[i]=='6') b=6;
+    		else if(sb[i]=='7') b=7;
+    		else if(sb[i]=='8') b=8;
+    		else if(sb[i]=='9') b=9;
+   		    
+        sum=a+b+p;
+    		p=sum/10;
+			  v.push_back(sum%10);
+    	}
+  	  
+	  if(p==1) v.push_back(1);
+  	  
+  	  /*while(1)                     
+  	    {vector<int>::iterator  it;
+	     it=v.end()-1;
+  	     if(*it==0) v.erase(it);
+  	     else break;
+  	    } 这个语句本来的意思应该是去掉v
+        后面的0，但是v后面不可能有零，因为要进位*/                     
+  	  
+	  for(j=0;j<v.size();j++)
+  	    {
+ 	     if(u==0&&v[j]!=0) u=1; 
+ 	     if(u==1) cout<<v[j]; 
+  	    }            //去掉前面的0，好方法。 
+  	  
+	  cout<<endl;
+  	  v.clear();
+  	  u=0;
+	  p=0;
+	}
+}
