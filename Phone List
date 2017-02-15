@@ -1,0 +1,68 @@
+题目描述
+Given a list of phone numbers, determine if it is consistent in the sense that no number is the prefix of another. Let's say the phone catalogue listed these numbers:
+- Emergency 911
+- Alice 97 625 999
+- Bob 91 12 54 26
+
+
+In this case, it's not possible to call Bob, because the central would direct your call to the emergency line as soon as you had dialled the first three digits of Bob's phone number. So this list would not be consistent.
+
+输入
+The first line of input gives a single integer, 1 <= t <= 40, the number of test cases. Each test case starts with n, the number of phone numbers, on a separate line, 1 <= n <= 10000.Then follows n lines with one unique phone number on each line. A phone number is a sequence of at most ten digits.
+
+
+输出
+For each test case, output "YES" if the list is consistent, or "NO" otherwise.
+
+样例输入
+2
+3
+911
+97625999
+91125426
+5
+113
+12340
+123440
+12345
+98346
+
+样例输出
+NO
+YES
+
+
+
+
+
+#include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int main()
+{ vector<string>v;
+  string s;
+  int n,i,j,m;
+  cin>>n;
+  char ch[99];
+  while(cin>>m)
+  {
+  	v.clear();
+  	for(i=0;i<m;i++)
+  	{
+	  	scanf("%s",&ch);
+        s=ch;       //把字符数组给字符串 
+		v.push_back(s);
+  	}
+     sort(v.begin(),v.end());          	//给v中的元素排序  sort(v.begin(),v.end()) 一个子元素的排。 
+     for(i=0;i<m-1;i++)
+        {
+        	if(v[i+1].find(v[i])==0)    //如果发现上面的v跟下面的开头几个元素一样 
+        	{printf("NO\n"); 
+        	 goto RL;}
+        }
+     printf("YES\n");
+ 	 RL:continue;
+  }
+}	
