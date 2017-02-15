@@ -1,0 +1,57 @@
+Description
+We all know that FatMouse doesn't speak English. But now he has to be prepared since our nation will join WTO soon. Thanks to Turing we have computers to help him.
+
+Input
+Input consists of up to 100,005 dictionary entries, followed by a blank line, followed by a message of up to 100,005 words. Each dictionary entry is a line containing an English word, followed by a space and a FatMouse word. No FatMouse word appears more than once in the dictionary. The message is a sequence of words in the language of FatMouse, one word on each line. Each word in the input is a sequence of at most 10 lowercase letters.
+
+Output
+Output is the message translated to English, one word per line. FatMouse words not in the dictionary should be translated as "eh".
+
+Sample Input
+dog ogday
+cat atcay
+pig igpay
+froot ootfray
+loops oopslay
+
+atcay
+ittenkay
+oopslay
+
+Sample Output
+cat
+eh
+loops
+
+
+
+
+#include<iostream>
+#include<map>
+#include<string>
+using namespace std;
+int main()
+{   
+	string s;
+	char ss[100],s1[100],s2[100];
+	int x,y;
+	map<string,string>m;  //map映照容器：键值+映照数据
+	map<string,string>::iterator p; //迭代器
+	while(gets(ss))        //gets()输入比getline()快的多 
+	{                       //gets()从stdin流中读取字符串，直至接收到换行符后EOF时停止 
+		s=ss;
+		if(s=="") break;
+		else
+		{sscanf(s.c_str(),"%s %s",s1,s2);  //s.c_str()是个指针，指向s 
+		 m[s2]=s1;		
+		}
+	}
+	while(cin>>s)
+	{
+		p=m.find(s);        //从映照容器中查找键值 
+		if(p!=m.end())
+		     cout<<m[s]<<endl;
+        else 
+             cout<<"eh"<<endl;
+	}
+}
