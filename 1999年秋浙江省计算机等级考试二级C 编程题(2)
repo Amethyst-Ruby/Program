@@ -1,0 +1,32 @@
+Description
+编制程序，统计一段文字中字符$出现的次数.
+
+Input
+字符文本
+
+Output
+$出现的次数
+
+Sample Input
+as$dfkjhkjkjdhf
+asdfkj$lskdfj
+werijweirjo$wie 
+
+Sample Output
+3
+
+
+
+#include<iostream>
+using namespace std;
+int main()
+{
+	char a[999];
+	int n=0;
+	int i;
+	for(i=0;scanf("%c",&a[i]),a[i]!=' ';i++)      //scanf("%c",&a[i]),a[i]!=' '
+	{
+		if(a[i]=='$') n++;
+	}
+	cout<<n<<endl;
+}
