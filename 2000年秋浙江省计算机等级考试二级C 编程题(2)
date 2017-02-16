@@ -1,0 +1,40 @@
+Description
+编制函数del_char
+函数原型为 void del_char(char *,char),函数的功能是删除a指向的字符串中值为ch的字符，例如从字符串"AscADef"中删除'A'后，字符串为"scDef"。
+
+Input
+需要删除的字符ch
+需要处理的字符串
+
+Output
+处理后的字符串
+
+Sample Input
+A
+AscADef
+
+Sample Output
+scDef
+
+
+
+
+
+#include <iostream>
+using namespace std;
+int del_char(char *p,char ch)
+{
+    int i,j;
+    for(j=i=0;p[i];i++)
+        if(p[i]!=ch)
+            p[j++]=p[i];
+    p[j]=p[i];
+}
+int main()
+{
+    char a,str[99];
+    cin>>a;
+    scanf("%s",str);
+    del_char(str,a);
+    cout<<str<<endl;
+}
