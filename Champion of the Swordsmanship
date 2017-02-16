@@ -1,0 +1,47 @@
+Description
+In Zhejiang University, there is a famous BBS named Freecity. Usually we call it 88.
+Recently some students at the Humour board on 88 create a new game - Swordsmanship. Different from the common sword fights, this game can be held with three players playing together in a match. Only one player advances from the match while the other two are eliminated. Sometimes they also hold a two-player match if needed, but they always try to hold the tournament with as less matches as possible.
+
+Input
+The input contains several test cases. Each case is specified by one positive integer n (0 < n < 1000000000), indicating the number of players. Input is terminated by n=0.
+
+
+Output
+For each test case, output a single line with the least number of matches needed to decide the champion.
+
+Sample Input
+3
+4
+0
+
+Sample Output
+1
+2
+
+
+
+
+
+#include<iostream>
+using namespace std;
+int main()
+{
+	int c=0,sh,ne,sum;
+	while(cin>>ne,ne!=0)
+	{
+		sum=0;
+		while(1)
+		{
+			if(ne==1)
+				{cout<<sum<<endl;break;}
+	        if(ne==2)
+	            {cout<<sum+1<<endl;break;}
+            c=ne/3;
+            sh=ne%3;
+            ne=c+sh;
+            sum=sum+c;
+            
+		}
+		sum=0;
+	}
+}
