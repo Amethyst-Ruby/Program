@@ -1,0 +1,113 @@
+Description
+Have you ever used file searching tools provided by an operating system? For example, in DOS, if you type "dir *.exe", the OS will list all executable files with extension "exe" in the current directory. These days, you are so mad with the crappy operating system you are using and you decide to write an OS of your own. Of course, you want to implement file searching functionality in your OS.
+
+Input
+The input contains several test cases. Consecutive test cases are separated by a blank line. Each test case begins with an integer N (1 <= N < =100), the number of files in the current directory. Then N lines follow, each line has one string consisting of lowercase letters ('a'..'z') and the dot ('.') only, which is the name of a file. Then there is an integer M (1 <= M <= 20), the number of queries. M lines follow, each has one query string consisting of lowercase letters, the dot and the star ('*') character only. Note that the star character is the "universal matching character" which is used to represent zero or numbers of characters that are uncertain. In the beginning, you just want to write a simple version of file searching, so every string contains no more than 64 characters and there is one and only one star character in the query string. Process to the End Of File (EOF).
+
+Output
+For each test case, generate one line for the results of each query. Separate file names in the result by a comma (',') and a blank (' ') character. The file names in the result of one query should be listed according to the order they appear in the input. If there is no matching file, output "FILE NOT FOUND" (without the quotation) instead. Separate two consecutive test cases with a blank line, but Do NOT output an extra blank line after the last one. 
+
+Sample Input
+4
+command.com
+msdos.sys
+io.sys
+config.sys
+2
+com*.com
+*.sys
+
+3
+a.txt
+b.txt
+c.txt
+1
+*.doc
+
+
+Sample Output
+command.com
+msdos.sys, io.sys, config.sys
+
+FILE NOT FOUND
+
+
+
+
+
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<string.h>
+#include<set>
+#include<string>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	string s,ss,le,ri;
+	vector<string>v,end;
+	int m,n,i,j,k,p,q,c=0;
+	while(cin>>m)
+	{
+		c++;
+		if(c>1)cout<<endl;
+		v.clear();
+		for(i=0;i<m;i++)
+		{
+			cin>>s;
+			v.push_back(s);
+		}
+		cin>>n;
+		for(i=0;i<n;i++)
+		{
+			cin>>ss;
+			le="";
+			ri="";
+			p=ss.find("*");
+			for(j=0;j<p;j++)
+			{
+				le+=ss[j];
+			}
+			for(j=p+1;j<ss.length();j++)
+			{
+				ri+=ss[j];
+			}
+			end.clear();
+			for(j=0;j<v.size();j++)
+			{
+				if(v[j].size()<(le.size()+ri.size())) continue;
+				if(le.size()!=0)
+				  {
+  					if(v[j].find(le)!=0)   continue;
+  				  }
+				if(ri.size()!=0)
+				  {
+  					reverse(ri.begin(),ri.end());
+  					reverse(v[j].begin(),v[j].end());
+  					if(v[j].find(ri)!=0)
+  					  {
+  					  	reverse(ri.begin(),ri.end());
+  					  	reverse(v[j].begin(),v[j].end());
+  					  	continue;
+  					  }
+				    reverse(ri.begin(),ri.end());
+				    reverse(v[j].begin(),v[j].end());
+  				  }
+				end.push_back(v[j]);
+				
+			}
+			for(k=0;k<end.size();k++)
+			{
+				cout<<end[k];
+				if(k!=end.size()-1)
+				    cout<<", ";
+                else 
+                    cout<<endl;
+			}
+			if(end.size()==0)
+			        cout<<"FILE NOT FOUND\n";
+		}
+	}
+}
