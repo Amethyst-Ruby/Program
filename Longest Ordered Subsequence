@@ -1,0 +1,79 @@
+题目描述
+A numeric sequence of ai is ordered if a1 < a2 < ... < aN. Let the subsequence of the given numeric sequence (a1, a2, ..., aN) be any sequence (ai1, ai2, ..., aiK), where 1 <= i1 < i2 < ... < iK <= N. For example, the sequence (1, 7, 3, 5, 9, 4, 8) has ordered subsequences, e.g., (1, 7), (3, 4, 8) and many others. All longest ordered subsequences of this sequence are of length 4, e.g., (1, 3, 5, 8). Your program, when given the numeric sequence, must find the length of its longest ordered subsequence.
+
+输入
+The first line of input contains the length of sequence N (1 <= N <= 1000). The second line contains the elements of sequence - N integers in the range from 0 to 10000 each, separated by spaces.
+
+输出
+Output must contain a single integer - the length of the longest ordered subsequence of the given sequence. This problem contains multiple test cases! The first line of a multiple input is an integer N, then a blank line followed by N input blocks. Each input block is in the format indicated in the problem description. There is a blank line between input blocks. The output format consists of N output blocks. There is a blank line between output blocks.
+
+样例输入
+1
+
+7
+1 7 3 5 9 4 8
+
+样例输出
+4
+
+
+
+
+
+#include<iostream>
+#include<vector>
+#include<string.h>
+#include<queue>
+#include<algorithm>
+#include<map>
+#include<cmath>
+#include<set>
+using namespace std;
+struct Info
+{
+	int ind;
+	int a;
+	int len;
+};
+vector<Info> v;
+int main()
+{ 
+   Info info;
+   int c,t,e,n,m,i,j,k,p;
+   cin>>c;
+   for(i=0;i<c;i++)
+   {
+   	v.clear();
+   	n=0;
+   	cin>>t;
+   	for(j=0;j<t;j++)
+   	{
+	   cin>>e;
+	   n++;
+	   v.push_back(info);
+	   v[n-1].ind=n;
+	   v[n-1].a=e;
+	   if(n==1)
+	   {
+   		  v[n-1].len=1;
+   		  continue;
+   	   }
+	   m=0;
+	   for(k=0;k<n;k++)
+	   {
+   		  if(v[k].a<e)
+   		     {
+     		  if(v[k].len>m)m=v[k].len; 	
+  		     }
+   	   }
+	   v[n-1].len=m+1;	
+    }
+   	m=0;
+   	for(p=0;p<n;p++)
+   	{
+	 if(v[p].len>m)m=v[p].len;  	
+    }
+   	if(i!=0) cout<<endl;
+    cout<<m<<endl;
+   }
+}
