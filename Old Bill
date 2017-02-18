@@ -1,0 +1,89 @@
+Among grandfather's papers a bill was found:
+                                                   72 turkeys $_679_
+The first and the last digits of the number that obviously represented the total price of those turkeys are replaced here by blanks (denoted _), for they are faded and are now illegible. What are the two faded digits and what was the price of one turkey?
+We want to write a program that solves a general version of the above problem:
+
+                                                   N turkeys $_XYZ_
+The total number of turkeys, N, is between 1 and 99, including both. The total price originally consisted of five digits, but we can see only the three digits in the middle. We assume that the first digit is nonzero, that the price of one turkey is an integer number of dollars, and that all the turkeys cost the same price.
+Given N, X, Y , and Z, write a program that guesses the two faded digits and the original price. In case that there is more than one candidate for the original price, the output should be the most expensive one. That is, the program is to report the two faded digits and the maximum price per turkey for the turkeys.
+
+输入
+The input consists of T test cases. The number of test cases (T) is given on the first line of the input file. The first line of each test case contains an integer N (0 < N < 100), which represents the number of turkeys. In the following line, there are the three decimal digits X, Y , and Z, separated by a space, of the original price $_XYZ_.
+
+输出
+For each test case, your program has to do the following. For a test case, there may be more than one candidate for the original price or there is none. In the latter case your program is to report 0. Otherwise, if there is more than one candidate for the original price, the program is to report the two faded digits and the maximum price per turkey for the turkeys. The following shows sample input and output for three test cases.
+
+样例输入
+3
+72
+6 7 9
+5
+2 3 7
+78
+0 0 5
+
+
+样例输出
+3 2 511
+9 5 18475
+0
+
+
+
+
+
+
+#include<iostream>
+#include<vector>
+#include<string.h>
+#include<queue>
+#include<algorithm>
+#include<map>
+#include<cmath>
+#include<set>
+using namespace std;
+struct xinxi
+{
+	int f;
+	int l;
+	int aver;
+};
+bool comp(const xinxi &a,const xinxi &b)
+{
+	if(a.aver!=b.aver) return a.aver>b.aver;
+}
+int main()
+{
+   xinxi info;
+   vector<xinxi>v;
+   int i,j,n,x,y,z,m,q;
+   cin>>q;
+   while(cin>>n)
+   {
+   	 cin>>x>>y>>z;
+   	 m=x*1000+y*100+z*10;
+   	 v.clear();
+   	 for(i=1;i<10;i++)
+   	     {
+     	     for(j=0;j<10;j++)
+			   {
+   				  if((i*10000+m+j)%n==0)
+   				  {
+  				   	info.f=i;
+  				   	info.l=j;
+  				   	info.aver=(i*10000+m+j)/n;
+  				   	v.push_back(info);
+  				   }
+   			   }	
+ 	     }
+     sort(v.begin(),v.end(),comp);
+     
+  	 if(v.size()==0)  
+	    cout<<"0"<<endl;
+  	 else 
+	    cout<<v[0].f<<" "<<v[0].l<<" "<<v[0].aver<<endl;
+     
+   }
+   return 0;
+}
+
