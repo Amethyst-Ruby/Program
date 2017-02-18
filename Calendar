@@ -1,0 +1,106 @@
+题目描述
+A calendar is a system for measuring time, from hours and minutes, to months and days, and finally to years and centuries. The terms of hour, day, month, year and century are all units of time measurements of a calender system. According to the Gregorian calendar, which is the civil calendar in use today, years evenly divisible by 4 are leap years, with the exception of centurial years that are not evenly divisible by 400. Therefore, the years 1700, 1800, 1900 and 2100 are not leap years, but 1600, 2000, and 2400 are leap years. Given the number of days that have elapsed since January 1, 2000 A.D, your mission is to find the date and the day of the week.
+
+输入
+The input consists of lines each containing a positive integer, which is the number of days that have elapsed since January 1, 2000 A.D. The last line contains an integer -1, which should not be processed. You may assume that the resulting date won't be after the year 9999.
+
+输出
+For each test case, output one line containing the date and the day of the week in the format of "YYYY-MM-DD DayOfWeek", where "DayOfWeek" must be one of "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" and "Saturday".
+
+样例输入
+1730
+1740
+1750
+1751
+-1
+
+样例输出
+2004-09-26 Sunday
+2004-10-06 Wednesday
+2004-10-16 Saturday
+2004-10-17 Sunday
+
+
+
+
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<set>
+#include<string>
+#include<algorithm>
+using namespace std;
+struct xinxi
+{
+   short int ye,mo,da,we;
+};
+vector<xinxi>v;
+bool rr(int ye)
+{
+	if((ye%4==0&&ye%100!=0)||(ye%400==0))
+	      return true;
+	else return false;
+}
+int main()
+{
+   int i,j,k,p=0;
+   xinxi in;
+   int f=0;  
+   int we=5;
+   for(i=2000;i<=9999;i++)
+   {
+   	f=rr(i);
+   	for(j=1;j<=12;j++)
+   	{
+   		for(k=1;k<=31;k++)
+   		{
+		   	if((j==1)||(j==3)||(j==5)||(j==7)||(j==8)||(j==10)||(j==12))
+		   	p++;
+		   	else if((j==4)||(j==6)||(j==9)||(j==11))
+		   	{
+	   			if(k!=31)p++;
+	   			else break;
+	   		}
+	   		else if(j==2)
+	   		{
+		   		if(f)
+		   		{
+		   			if(k!=30&&k!=31)p++;
+		   			else break;
+		   		}
+		   		else 
+		   		{
+		   			if(k!=29&&k!=30&&k!=31) p++;
+		   			else break;
+		   		}
+		   	}
+		 in.ye=i;
+		 in.mo=j;
+		 in.da=k;
+		 we++;
+		 if(we==8) we=1;
+		 in.we=we;
+		 v.push_back(in);  	
+	    }
+	   	
+     }
+   } 
+   int n;
+   while(cin>>n,n>=0)
+   {
+   	cout<<v[n].ye<<"-";
+   	if(v[n].mo<10) cout<<"0"<<v[n].mo<<"-";
+   	else cout<<v[n].mo<<"-";
+   	if(v[n].da<10) cout<<"0"<<v[n].da<<' ';
+   	else cout<<v[n].da<<' ';
+   	if(v[n].we==1)cout<<"Monday\n";
+   	if(v[n].we==2)cout<<"Tuesday\n";
+   	if(v[n].we==3)cout<<"Wednesday\n";
+   	if(v[n].we==4)cout<<"Thursday\n";
+   	if(v[n].we==5)cout<<"Friday\n";
+   	if(v[n].we==6)cout<<"Saturday\n";
+   	if(v[n].we==7)cout<<"Sunday\n";
+   }
+   
+}
