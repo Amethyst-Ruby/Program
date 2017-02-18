@@ -1,0 +1,68 @@
+题目描述
+Message queue is the basic fundamental of windows system. For each process, the system maintains a message queue. If something happens to this process, such as mouse click, text change, the system will add a message to the queue. Meanwhile, the process will do a loop for getting message from the queue according to the priority value if it is not empty. Note that the less priority value means the higher priority. In this problem, you are asked to simulate the message queue for putting messages to and getting message from the message queue.
+
+输入
+There's only one test case in the input. Each line is a command, "GET" or "PUT", which means getting message or putting message. If the command is "PUT", there're one string means the message name and two integer means the parameter and priority followed by. There will be at most 60000 command. Note that one message can appear twice or more and if two messages have the same priority, the one comes first will be processed first.(i.e., FIFO for the same priority.) Process to the end-of-file.
+
+输出
+For each "GET" command, output the command getting from the message queue with the name and parameter in one line. If there's no message in the queue, output "EMPTY QUEUE!". There's no output for "PUT" command.
+
+样例输入
+GET
+PUT msg1 10 5
+PUT msg2 10 4
+GET
+GET
+GET
+
+样例输出
+EMPTY QUEUE!
+msg2 10
+msg1 10
+EMPTY QUEUE!
+
+
+
+
+
+#include<iostream>
+#include<vector>
+#include<string.h>
+#include<queue>
+#include<algorithm>
+using namespace std;
+struct Message
+{
+	 char name[100];
+	 int data;
+	 int priority;
+	 bool operator <(const Message &a) const
+	  {
+  		return a.priority<priority;
+  	  }
+};
+priority_queue<Message> v;
+int main()
+{
+  char command[100];
+  Message message;
+  while(scanf("%s",command)!=EOF)
+  {
+  	if(strcmp(command,"GET")==0)
+  	{
+	      if(v.size()==0)
+		      printf("EMPTY QUEUE!\n");
+		  else 
+		  {
+  			printf("%s %d\n",v.top().name,v.top().data);
+  			v.pop();
+  		  } 	
+    }
+    else if(strcmp(command,"PUT")==0)
+        {
+        	scanf("%s%d%d",&message.name,&message.data,&message.priority);
+        	v.push(message);
+        }
+  }
+}
+
