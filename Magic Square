@@ -1,0 +1,97 @@
+Description
+In recreational mathematics, a magic square of n-degree is an arrangement of n2 numbers, distinct integers, in a square, such that the n numbers in all rows, all columns, and both diagonals sum to the same constant. For example, the picture below shows a 3-degree magic square using the integers of 1 to 9. 
+Given a finished number square, we need you to judge whether it is a magic square. 
+
+Input
+The input contains multiple test cases. The first line of each case stands an only integer N (0 < N < 10), indicating the degree of the number square and then N lines follows, with N positive integers in each line to describe the number square. All the numbers in the input do not exceed 1000. A case with N = 0 denotes the end of input, which should not be processed.
+
+Output
+For each test case, print "Yes" if it's a magic square in a single line, otherwise print "No".
+
+Sample Input
+2
+1 2
+3 4
+2
+4 4
+4 4
+3
+8 1 6
+3 5 7
+4 9 2
+4
+16 9 6 3
+5 4 15 10
+11 14 1 8
+2 7 12 13
+0
+
+Sample Output
+No
+No
+Yes
+Yes
+
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<string.h>
+#include<set>
+using namespace std;
+int main()
+{
+	int ma[9][9];
+	int li[9],co[9];
+	int a,b,n,i,j;
+	set<int>s;
+	while(cin>>n,n!=0)
+	{
+		for(i=0;i<n;i++)
+		{
+			for(j=0;j<n;j++)
+			{
+				cin>>ma[i][j];
+			}
+		}
+	    s.clear();
+		for(i=0;i<n;i++)
+		{
+			for(j=0;j<n;j++)
+			{
+				s.insert(ma[i][j]);
+			}
+		}
+		if(s.size()!=n*n)
+		{
+			cout<<"No"<<endl;
+			continue;
+		}	
+		a=0;b=0;
+		for(i=0;i<n;i++)
+		{
+			li[i]=0;
+			co[i]=0;
+		}
+		for(i=0;i<n;i++)
+		{
+			for(j=0;j<n;j++)
+			{
+				li[i]+=ma[i][j];
+				co[j]+=ma[i][j];
+				if(i==j) a=a+ma[i][j];
+				if(i+j==n-1) b=b+ma[i][j];
+			}
+		}
+		s.clear();
+		s.insert(a);
+		s.insert(b);
+		for(i=0;i<n;i++)
+		{
+			s.insert(li[i]);
+			s.insert(co[i]);
+		}
+		if(s.size()!=1)cout<<"No\n";
+		else cout<<"Yes\n";
+	}
+}
