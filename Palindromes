@@ -1,0 +1,93 @@
+Description
+A regular palindrome is a string of numbers or letters that is the same forward as backward. For example, the string "ABCDEDCBA" is a palindrome because it is the same when the string is read from left to right as when the string is read from right to left. Now give you a string S, you should count how many palindromes in any consecutive substring of S.
+
+Input
+There are several test cases in the input. Each case contains a non-empty string which has no more than 5000 characters. Proceed to the end of file.
+
+Output
+A single line with the number of palindrome substrings for each case. 
+
+Sample Input
+aba
+aa
+
+Sample Output
+4
+3
+
+
+
+
+
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<string.h>
+using namespace std;
+int main()
+{
+	char s[5000];
+	int p,i,ha,le,ri,co;
+	while(cin>>s)
+	{
+		i=strlen(s);
+		co=0;
+		for(p=0;p<i-1;p++)
+		{
+			ha=((i-1)-p)/2;
+			if(((i-1)-p)%2==0)
+			    {
+    				le=p+ha-1;
+    				ri=p+ha+1;
+    			}
+			else
+			    {
+    				le=p+ha;
+    				ri=p+ha+1;
+    			}
+    		while(le>=p)
+			    {
+    				if(s[le]==s[ri])
+    				{
+				    	co++;
+				    	le--;
+				    	ri++;
+				    }
+				    else
+				    {
+    					break;
+    				}
+    			}	
+	    }
+	    for(p=i-2;p>=1;p--)
+	       {
+       		  ha=p/2;
+       		  if(p%2==0)
+       		     {
+       		     	le=ha-1;
+       		     	ri=ha+1;
+                 }
+              else 
+                 {
+                 	le=ha;
+                 	ri=ha+1;
+                 }
+              while(le>=0)
+                 {
+                 	if(s[le]==s[ri])
+                 	    {
+                 	    	co++;
+                 	    	le--;
+                 	    	ri++;   	       	
+	                    }
+                    else 
+                        {
+                        	break;
+                        }
+                 }  
+       		
+       	   }
+	    printf("%d\n",co+i);
+	    
+	}
+}
