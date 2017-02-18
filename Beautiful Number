@@ -1,0 +1,53 @@
+题目描述
+Mike is very lucky, as he has two beautiful numbers, 3 and 5. But he is so greedy that he wants infinite beautiful numbers. So he declares that any positive number which is dividable by 3 or 5 is beautiful number. Given you an integer N (1 <= N <= 100000), could you please tell mike the Nth beautiful number? 
+
+输入
+The input consists of one or more test cases. For each test case, there is a single line containing an integer N. 
+
+输出
+For each test case in the input, output the result on a line by itself. 
+
+样例输入
+1
+2
+3
+4
+
+样例输出
+3
+5
+6
+9
+
+
+
+
+
+#include<iostream>
+#include<vector>
+#include<string.h>
+#include<queue>
+#include<algorithm>
+#include<map>
+using namespace std;
+map<int,int> m;
+int main()
+{
+	int i=0;
+	int p=0;
+	while(1)
+	{
+		i++;
+		if(i%3==0||i%5==0)
+		{
+			p++;
+			if(p>100000) break;
+			m[p]=i;
+		}
+	}
+	int n;
+	map<int,int>::iterator it;
+	while(cin>>n)
+	 {cout<<m[n]<<endl;}
+	
+}
