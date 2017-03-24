@@ -1,0 +1,75 @@
+Description
+现在有一种只包括左右小括号（“（”和“）”）和空格（” “）的字符串序列，请你判断括号是否匹配，如果匹配就输出Yes，不匹配输出No。
+
+Input
+输入数据第一行输入一个T（0≤T≤100），表示测试数据的组数。
+
+接下来有T行测试数据，每行有一个符合题意的字符串，字符串长度不超过500。
+
+Output
+每组测试数据，先输出一个”Case %d：“，%d表示第几组测试数据。接着，如果字符串括号匹配，输出Yes，否则，输出No。具体输出格式参考下面输出样例。
+
+Sample Input
+2
+( ())
+)(
+Sample Output
+Case 1:Yes
+Case 2:No
+
+
+
+
+#include<iostream>
+#include<string>
+#include<stack>
+using namespace std;
+int main()
+{
+	int n,i;
+	string str;
+	stack<char>sta;    //定义成字符型的栈； 
+	cin>>n;
+	getchar();         //不知道为什么要输入一个字符，可能是个换行符，求大神 
+	int k=0;
+	while(n--)
+	{
+		k++;
+		getline(cin,str);   
+		for(i=0;i<str.size();i++)
+		{
+			if(str[i]=='(')
+			{
+				sta.push(str[i]);
+			}
+			if(str[i]==')')
+			{
+				if(!sta.empty())
+				{
+					sta.pop();
+				}
+				else if(sta.empty())
+				{
+					cout<<"Case "<<k<<':'<<"No\n";
+					goto RL;
+				}
+			}
+		}
+		if(sta.empty())
+		{
+		   cout<<"Case "<<k<<':'<<"Yes\n";
+		}
+		else
+		{
+			cout<<"Case "<<k<<':'<<"No\n";
+		}
+		while(!sta.empty())         //重点在这，一定要把栈清空一遍不然后面 
+              sta.pop();            //的数据就会有问题。 
+		str="";
+		RL:
+		{str="";
+		 while(!sta.empty())
+           sta.pop();
+         continue;}
+	}
+}
