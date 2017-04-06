@@ -1,0 +1,78 @@
+Description
+给你n个整数，请按从大到小的顺序输出其中前m大的数。 
+ 
+Input
+每组测试数据有两行，第一行有两个数n,m(0<n,m<1000000)，第二行包含n个各不相同，且都处于区间[-500000,500000]的整数。 
+ 
+Output
+对每组测试数据按从大到小的顺序输出前m大的数。 
+ 
+Sample Input
+ 5 3
+3 -35 92 213 -644 
+ 
+Sample Output
+ 213 92 3 
+
+
+
+
+#include<stdio.h>
+#define N 1000050
+#include<stdlib.h>
+#include<time.h>
+
+int a[N];
+int m;
+
+void QuickSort(int low,int high)
+{
+    int k;
+    int i;
+    k=a[low];
+    int left=low;
+    int right=high;
+    if(left>right)
+        return ;
+    while(left!=right){
+        while(a[right]<k&&left<right)
+            right--;
+        if(left<right){
+            a[left]=a[right];
+            left++;
+        }
+        while(a[left]>k&&left<right)
+            left++;
+        if(left<right){
+            a[right]=a[left];
+            right--;
+        }
+    }
+    a[left]=k;
+    if(m<=left+1) QuickSort(low,left-1);
+    else {
+        QuickSort(low,left-1);
+        QuickSort(left+1,high);
+    }
+}
+
+int main()
+{
+    int i;
+    int j;
+    int n;
+    while(scanf("%d%d",&n,&m)!=EOF)
+	{
+        for(i=0;i<n;i++)
+            scanf("%d",&a[i]);
+        QuickSort(0,n-1);
+        for(i=0;i<m;i++)
+		{
+            printf("%d",a[i]);
+            if(i!=m-1)
+                printf(" ");
+        }
+        printf("\n");
+    }
+    return 0;
+}
