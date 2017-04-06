@@ -22,7 +22,7 @@ Sample Output
 #include<stdlib.h>
 #include<time.h>
 
-int a[N];
+int a[N];            //当数据过大时要放在函数外面防止栈溢出
 int m;
 
 void QuickSort(int low,int high)
@@ -61,15 +61,15 @@ int main()
     int i;
     int j;
     int n;
-    while(scanf("%d%d",&n,&m)!=EOF)
-	{
+    while(scanf("%d%d",&n,&m)!=EOF)      //恩恩
+    {
         for(i=0;i<n;i++)
             scanf("%d",&a[i]);
         QuickSort(0,n-1);
         for(i=0;i<m;i++)
-		{
+	{
             printf("%d",a[i]);
-            if(i!=m-1)
+            if(i!=m-1)        //另一种方法
                 printf(" ");
         }
         printf("\n");
