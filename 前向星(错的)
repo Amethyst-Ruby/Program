@@ -1,0 +1,75 @@
+#include<iostream>
+#include<cstring>
+#include<queue>
+using namespace std;
+
+struct node
+{
+    int v;
+    int next;
+};
+
+const int v=501;
+node edge[v*4];
+int head[v];
+int cnt;
+int deg[v];
+
+void  toposort(int n)
+{
+    int i;
+    int k=1;
+    priority_queue< int,vector<int>,greater<int> >que;
+    //priority_queue<Type, Container, Functional>
+    //<数据类型，保存数据的容器，元素比较的方式。
+
+    for(i=1;i<=n;i++)
+    {
+        if(deg[i]==0)
+        {
+            que.push(i);
+            deg[i]--;
+        }
+    }
+    while(que.empty()==false)
+    {
+        int u=que.top();
+        que.pop();
+        cout<<v;
+        if(k++==n)cout<<endl;
+        else cout<<" ";
+        for(i=head[u];i!=-1;i=edge[i].next)
+        {
+            edge[i].v--;
+            if(edge[i].v==0)
+                que.push(edge[i].v);
+        }
+    }
+}
+int main()
+{
+    int n,m;
+    int i;
+    while(cin>>n>>m)
+    {
+        memset(head,-1,sizeof(head));
+        memset(deg,0,sizeof(deg));
+        cnt=0;
+        while(m--)
+        {
+            int v,u;
+            cin>>v>>u;
+            for(i=head[v];i!=-1;i=edge[i].next)
+                    if(edge[i].v==u)
+                    break;
+            if(i==-1)
+            {
+                deg[u]++;
+                edge[cnt].v=u;
+                edge[cnt].next=head[v];
+                head[v]=cnt++;
+            }
+        }
+        toposort(n);
+    }
+}
