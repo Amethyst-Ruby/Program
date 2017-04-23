@@ -20,7 +20,7 @@ void  toposort(int n)
     int i;
     int k=1;
     priority_queue< int,vector<int>,greater<int> >que;
-    //priority_queue<Type, Container, Functional>
+    //priority_queue<Type, Container, Functional> 
     //<数据类型，保存数据的容器，元素比较的方式。
 
     for(i=1;i<=n;i++)
